@@ -25,3 +25,7 @@ dependencies {
     compile project(':httpwrapper')
     compile 'com.google.android.gms:play-services-appindexing:8.4.0'
 }
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
