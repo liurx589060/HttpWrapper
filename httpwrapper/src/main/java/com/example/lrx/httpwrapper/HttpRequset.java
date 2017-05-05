@@ -52,7 +52,12 @@ public class HttpRequset {
      */
     public <T> void execute(HttpParams params, final HttpResultListener<T> listener) {
         if(httpExcute != null) {
-            httpExcute.execute(params,listener);
+            try {
+                httpExcute.execute(params,listener);
+            }catch (Exception e) {
+                e.printStackTrace();
+                Log.e(Constant.TAG,e.toString());
+            }
         }
     }
 

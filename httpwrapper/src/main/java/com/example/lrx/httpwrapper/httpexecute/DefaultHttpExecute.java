@@ -32,8 +32,13 @@ public class DefaultHttpExecute extends AbsHttpExecute {
     }
 
     @Override
-    public void execute(HttpParams params, final HttpResultListener listener) {
+    public void execute(HttpParams params, final HttpResultListener listener) throws Exception{
         if(params.method == HttpParams.Method.NOMAL_GET) {//get方法
+
+//            if(!(listener instanceof DefaultGetResultListener)) {
+//                throw new Exception("请使用DefaultGetResultListener的回调类");
+//            }
+
             OkGo.get(params.url)
                     .tag(params.tag)
                     .cacheMode(!params.cache?CacheMode.NO_CACHE:CacheMode.REQUEST_FAILED_READ_CACHE)
@@ -54,6 +59,10 @@ public class DefaultHttpExecute extends AbsHttpExecute {
                         }
                     });
         }else if (params.method == HttpParams.Method.DOWN_GET) {//get方法下载
+//            if(!(listener instanceof DefaultDownResultListener)) {
+//                throw new Exception("请使用DefaultDownResultListener的回调类");
+//            }
+
             OkGo.get(params.url)
                     .tag(params.tag)
                     .execute(new FileCallback() {
@@ -92,6 +101,10 @@ public class DefaultHttpExecute extends AbsHttpExecute {
                         }
                     });
         }else if (params.method == HttpParams.Method.POST) {//post方法,主要用于上传
+//            if(!(listener instanceof DefaultUploadResultListener)) {
+//                throw new Exception("请使用DefaultUploadResultListener的回调类");
+//            }
+
             PostRequest postRequset = OkGo.post(params.url);
             if(params.params == null) {params.params = new HashMap<>();};
             Iterator<String> iter = params.params.keySet().iterator();

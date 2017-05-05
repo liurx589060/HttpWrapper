@@ -2,6 +2,7 @@ package com.example.lrx.demohttpwrapper;
 
 import android.app.Activity;
 import android.os.Bundle;;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import com.example.lrx.httpwrapper.HttpParams;
@@ -41,30 +42,35 @@ public class FileDownActivity extends Activity {
         mResult = (TextView) findViewById(R.id.result);
         mProgress = (TextView) findViewById(R.id.progress);
 
-        HttpParams params = HttpRequset.getInstance().setHttpMethod(HttpParams.Method.DOWN_GET);
-        params.setUrl(url);
-        params.setTag(this);
-        Map<String,String> paramsMap = new HashMap<>();
-        paramsMap.put("param1","param1");
-        params.setParamsMap(paramsMap);
-        mRequest.setText(url);
-
-        HttpRequset.getInstance().execute(params, new DefaultDownResultListener() {
+        mDown.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onSuccess(byte[] response) {
-                mResult.setText("下载完成");
-            }
+            public void onClick(View v) {
+                HttpParams params = HttpRequset.getInstance().setHttpMethod(HttpParams.Method.DOWN_GET);
+                params.setUrl(url);
+                params.setTag(this);
+                Map<String,String> paramsMap = new HashMap<>();
+                paramsMap.put("param1","param1");
+                params.setParamsMap(paramsMap);
+                mRequest.setText(url);
 
-            @Override
-            public void onFailure(String failMessage) {
-                mResult.setText("下载失败");
-            }
+                HttpRequset.getInstance().execute(params, new DefaultDownResultListener() {
+                    @Override
+                    public void onSuccess(byte[] response) {
+                        mResult.setText("下载完成");
+                    }
 
-            @Override
-            public void downloadProgress(long currentSize, long totalSize, float progress) {
-                super.downloadProgress(currentSize, totalSize, progress);
-                mProgress.setText("总量=" + totalSize + "\n" + "目前下载量=" + currentSize + "\n" +
-                "百分比=" + progress * 100 + "%");
+                    @Override
+                    public void onFailure(String failMessage) {
+                        mResult.setText("下载失败");
+                    }
+
+                    @Override
+                    public void downloadProgress(long currentSize, long totalSize, float progress) {
+                        super.downloadProgress(currentSize, totalSize, progress);
+                        mProgress.setText("总量=" + totalSize + "\n" + "目前下载量=" + currentSize + "\n" +
+                                "百分比=" + progress * 100 + "%");
+                    }
+                });
             }
         });
     }

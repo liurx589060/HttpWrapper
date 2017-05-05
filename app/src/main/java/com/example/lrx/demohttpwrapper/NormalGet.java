@@ -2,6 +2,7 @@ package com.example.lrx.demohttpwrapper;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -33,22 +34,27 @@ public class NormalGet extends Activity {
         mRequest = (TextView) findViewById(R.id.request);
         mResult = (TextView) findViewById(R.id.result);
 
-        HttpParams params = HttpRequset.getInstance().setHttpMethod(HttpParams.Method.NOMAL_GET);
-        params.setUrl(url);
-        params.setTag(this);
-        Map<String, String> paramsMap = new HashMap<>();
-        paramsMap.put("param1", "param1");
-        params.setParamsMap(paramsMap);
-        mRequest.setText(url);
-        HttpRequset.getInstance().execute(params, new DefaultGetResultListener() {
+        mGet.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onSuccess(String response) {
-                mResult.setText(response);
-            }
+            public void onClick(View v) {
+                HttpParams params = HttpRequset.getInstance().setHttpMethod(HttpParams.Method.DOWN_GET);
+                params.setUrl(url);
+                params.setTag(this);
+                Map<String, String> paramsMap = new HashMap<>();
+                paramsMap.put("param1", "param1");
+                params.setParamsMap(paramsMap);
+                mRequest.setText(url);
+                HttpRequset.getInstance().execute(params, new DefaultGetResultListener() {
+                    @Override
+                    public void onSuccess(String response) {
+                        mResult.setText(response);
+                    }
 
-            @Override
-            public void onFailure(String failMessage) {
-                mResult.setText(failMessage);
+                    @Override
+                    public void onFailure(String failMessage) {
+                        mResult.setText(failMessage);
+                    }
+                });
             }
         });
     }

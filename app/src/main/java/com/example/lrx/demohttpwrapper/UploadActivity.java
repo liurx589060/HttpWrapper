@@ -2,6 +2,7 @@ package com.example.lrx.demohttpwrapper;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -48,35 +49,40 @@ public class UploadActivity extends Activity {
         mResult = (TextView) findViewById(R.id.result);
         mProgress = (TextView) findViewById(R.id.progress);
 
-        HttpParams params = HttpRequset.getInstance().setHttpMethod(HttpParams.Method.POST);
-        params.setUrl(url);
-        params.setTag(this);
-        Map<String,String> paramsMap = new HashMap<>();
-        paramsMap.put("param1","param1");
-        params.setParamsMap(paramsMap);
-
-        Map<String,File> fileMap = new HashMap<>();
-        File file= getRawFile();
-        fileMap.put("upfile1",file);
-        params.setFileMap(fileMap);
-        mRequest.setText(url);
-
-        HttpRequset.getInstance().execute(params, new DefaultUploadResultListener() {
+        mDown.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onSuccess(String response) {
-                mResult.setText(response);
-            }
+            public void onClick(View v) {
+                HttpParams params = HttpRequset.getInstance().setHttpMethod(HttpParams.Method.POST);
+                params.setUrl(url);
+                params.setTag(this);
+                Map<String,String> paramsMap = new HashMap<>();
+                paramsMap.put("param1","param1");
+                params.setParamsMap(paramsMap);
 
-            @Override
-            public void onFailure(String failMessage) {
-                mResult.setText(failMessage);
-            }
+                Map<String,File> fileMap = new HashMap<>();
+                File file= getRawFile();
+                fileMap.put("upfile1",file);
+                params.setFileMap(fileMap);
+                mRequest.setText(url);
 
-            @Override
-            public void upProgress(long currentSize, long totalSize, float progress) {
-                super.upProgress(currentSize, totalSize, progress);
-                mProgress.setText("总量=" + totalSize + "\n" + "目前上传量=" + currentSize + "\n" +
-                        "百分比=" + progress * 100 + "%");
+                HttpRequset.getInstance().execute(params, new DefaultUploadResultListener() {
+                    @Override
+                    public void onSuccess(String response) {
+                        mResult.setText(response);
+                    }
+
+                    @Override
+                    public void onFailure(String failMessage) {
+                        mResult.setText(failMessage);
+                    }
+
+                    @Override
+                    public void upProgress(long currentSize, long totalSize, float progress) {
+                        super.upProgress(currentSize, totalSize, progress);
+                        mProgress.setText("总量=" + totalSize + "\n" + "目前上传量=" + currentSize + "\n" +
+                                "百分比=" + progress * 100 + "%");
+                    }
+                });
             }
         });
     }
