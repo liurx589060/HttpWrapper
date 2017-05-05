@@ -15,15 +15,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 自定义回调接口
  * Created by liurunxiong on 2017/3/6.
  */
 
-public class NormalGet extends Activity {
+public class CustomCallBackActivity extends Activity {
     private Button mGet;
     private TextView mRequest;
     private TextView mResult;
 
-    private String url = "http://server.jeasonlzy.com/OkHttpUtils/method";
+    private String url = "http://www.weather.com.cn/adat/sk/101010100.html";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,7 @@ public class NormalGet extends Activity {
                 paramsMap.put("param1", "param1");
                 params.setParamsMap(paramsMap);
                 mRequest.setText(url);
-                HttpRequset.getInstance().execute(params, new DefaultGetResultListener() {
+                HttpRequset.getInstance().execute(params, new HttpResultListener<String>() {
                     @Override
                     public void onSuccess(String response) {
                         mResult.setText(response);

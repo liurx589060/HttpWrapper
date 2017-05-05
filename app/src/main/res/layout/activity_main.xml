@@ -30,12 +30,21 @@
         android:id="@+id/down_get" />
 
     <Button
-        android:text="上传"
+        android:id="@+id/upload_post"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/down_get"
         android:layout_alignLeft="@+id/down_get"
         android:layout_alignStart="@+id/down_get"
+        android:layout_below="@+id/down_get"
         android:layout_marginTop="49dp"
-        android:id="@+id/upload_post" />
+        android:text="上传" />
+
+    <Button
+        android:id="@+id/custom_callback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="自定义回调接口"
+        android:layout_below="@+id/upload_post"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
