@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.example.lrx.httpwrapper.HttpParams;
 import com.example.lrx.httpwrapper.HttpRequset;
 import com.example.lrx.httpwrapper.HttpResultListener;
+import com.example.lrx.httpwrapper.httpexecute.DefaultUploadResultListener;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -60,7 +61,7 @@ public class UploadActivity extends Activity {
         params.setFileMap(fileMap);
         mRequest.setText(url);
 
-        HttpRequset.getInstance().execute(params, new HttpResultListener<String>() {
+        HttpRequset.getInstance().execute(params, new DefaultUploadResultListener() {
             @Override
             public void onSuccess(String response) {
                 mResult.setText(response);
@@ -74,7 +75,7 @@ public class UploadActivity extends Activity {
             @Override
             public void upProgress(long currentSize, long totalSize, float progress) {
                 super.upProgress(currentSize, totalSize, progress);
-                mProgress.setText("总量=" + totalSize + "\n" + "目前下载量=" + currentSize + "\n" +
+                mProgress.setText("总量=" + totalSize + "\n" + "目前上传量=" + currentSize + "\n" +
                         "百分比=" + progress * 100 + "%");
             }
         });

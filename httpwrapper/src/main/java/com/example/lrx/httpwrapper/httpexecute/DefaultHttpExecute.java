@@ -1,7 +1,10 @@
-package com.example.lrx.httpwrapper;
+package com.example.lrx.httpwrapper.httpexecute;
 
 import android.app.Application;
 
+import com.example.lrx.httpwrapper.AbsHttpExecute;
+import com.example.lrx.httpwrapper.HttpParams;
+import com.example.lrx.httpwrapper.HttpResultListener;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.callback.FileCallback;
@@ -23,8 +26,8 @@ import okhttp3.Response;
  * Created by liurunxiong on 2017/3/1.
  */
 
-public class OkGoHttpExecute extends AbsHttpExecute {
-    public OkGoHttpExecute(Application application) {
+public class DefaultHttpExecute extends AbsHttpExecute {
+    public DefaultHttpExecute(Application application) {
         OkGo.init(application);
     }
 

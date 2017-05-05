@@ -7,6 +7,8 @@ import android.widget.TextView;
 import com.example.lrx.httpwrapper.HttpParams;
 import com.example.lrx.httpwrapper.HttpRequset;
 import com.example.lrx.httpwrapper.HttpResultListener;
+import com.example.lrx.httpwrapper.httpexecute.DefaultDownResultListener;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,7 +49,7 @@ public class FileDownActivity extends Activity {
         params.setParamsMap(paramsMap);
         mRequest.setText(url);
 
-        HttpRequset.getInstance().execute(params, new HttpResultListener<byte[]>() {
+        HttpRequset.getInstance().execute(params, new DefaultDownResultListener() {
             @Override
             public void onSuccess(byte[] response) {
                 mResult.setText("下载完成");

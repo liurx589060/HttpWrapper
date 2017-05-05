@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.example.lrx.httpwrapper.HttpParams;
 import com.example.lrx.httpwrapper.HttpRequset;
 import com.example.lrx.httpwrapper.HttpResultListener;
+import com.example.lrx.httpwrapper.httpexecute.DefaultGetResultListener;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,11 +36,11 @@ public class NormalGet extends Activity {
         HttpParams params = HttpRequset.getInstance().setHttpMethod(HttpParams.Method.NOMAL_GET);
         params.setUrl(url);
         params.setTag(this);
-        Map<String,String> paramsMap = new HashMap<>();
-        paramsMap.put("param1","param1");
+        Map<String, String> paramsMap = new HashMap<>();
+        paramsMap.put("param1", "param1");
         params.setParamsMap(paramsMap);
         mRequest.setText(url);
-        HttpRequset.getInstance().execute(params, new HttpResultListener<String>() {
+        HttpRequset.getInstance().execute(params, new DefaultGetResultListener() {
             @Override
             public void onSuccess(String response) {
                 mResult.setText(response);
@@ -50,6 +51,5 @@ public class NormalGet extends Activity {
                 mResult.setText(failMessage);
             }
         });
-
     }
 }

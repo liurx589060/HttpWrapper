@@ -9,7 +9,6 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -23,6 +22,7 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:25.0.1'
     compile project(':httpwrapper')
+//    compile 'com.lrx:httpwrapper:1.0.0'
     compile 'com.google.android.gms:play-services-appindexing:8.4.0'
 }
 
